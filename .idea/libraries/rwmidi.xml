@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="rwmidi">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/rwmidi.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

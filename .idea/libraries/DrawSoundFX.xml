@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="DrawSoundFX">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/dist/DrawSoundFX.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

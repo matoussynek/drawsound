@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="drawsoundfx.drawSoundFXMLController">
+   <children>
+      <Slider fx:id="slider" blockIncrement="1.0" layoutX="115.0" layoutY="43.0" max="127.0" prefHeight="39.0" prefWidth="160.0" value="63.0" />
+      <Button fx:id="mappingButt" layoutX="31.0" layoutY="43.0" mnemonicParsing="false" onAction="#mapCC" style="-fx-background-color: #DEDEDE;" text="MAP" />
+      <ImageView fx:id="imgView" fitHeight="319.0" fitWidth="475.0" layoutX="300.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="300.0" layoutY="43.0" mnemonicParsing="false" onAction="#selectImage" style="-fx-background-color: #DEDEDE;" text="Select image..." />
+   </children>
+</AnchorPane>
