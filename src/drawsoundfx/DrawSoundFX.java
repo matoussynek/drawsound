@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -24,6 +25,8 @@ public class DrawSoundFX extends Application {
         Scene scene = new Scene(root.load());
 
         stage.setScene(scene);
+        stage.setTitle("DrawSound - A MIDI device based on an image input by Matous Synek");
+        stage.getIcons().add(new Image("resources/icon.png"));
 
         drawSoundFXMLController controller = root.getController();
         controller.setStage(stage);

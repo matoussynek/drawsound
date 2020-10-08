@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="tevirtualmidi">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/tevirtualmidi.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
