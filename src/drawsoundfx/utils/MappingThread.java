@@ -26,6 +26,7 @@ public class MappingThread implements Runnable{
     @Override
     public void run() {
         int i = 0;
+
         while (isAlive()){
             device.sendController(channel, CCNumber, i);
             i = (i + 1)%128;

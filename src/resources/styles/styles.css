@@ -1,0 +1,9 @@
+.button{
+    -fx-background-color:  #DEDEDE;
+    -fx-text-fill:  #585858;
+}
+
+.slider .track {
+    -fx-background-color: #eaeaea;
+    height: 5px;
+}
