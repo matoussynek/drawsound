@@ -1,46 +1,133 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.Slider?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" fx:id="pane" focusTraversable="true" prefHeight="550.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="drawsoundfx.drawSoundFXMLController">
-   <children>
-      <Slider fx:id="slider80" blockIncrement="1.0" layoutX="133.0" layoutY="40.0" max="127.0" prefHeight="39.0" prefWidth="109.0" value="63.0" />
-      <Button fx:id="mappingButt80" layoutX="25.0" layoutY="47.0" mnemonicParsing="false" onAction="#mapCC80" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #DEDEDE; -fx-text-fill: #585858;" text="R CHANNEL" />
-      <ImageView fx:id="imgView" fitHeight="423.0" fitWidth="542.0" layoutX="334.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #cdcdcd;" />
-      <Button layoutX="330.0" layoutY="43.0" mnemonicParsing="false" onAction="#selectImage" style="-fx-background-color: #DEDEDE; -fx-text-fill: #585858;" text="Select image..." />
-      <Button fx:id="mappingButt81" layoutX="25.0" layoutY="99.0" mnemonicParsing="false" onAction="#mapCC81" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #DEDEDE; -fx-text-fill: #585858;" text="G CHANNEL" />
-      <Slider fx:id="slider81" blockIncrement="1.0" layoutX="133.0" layoutY="93.0" max="127.0" prefHeight="39.0" prefWidth="109.0" value="63.0" />
-      <Slider fx:id="slider82" blockIncrement="1.0" layoutX="133.0" layoutY="143.0" max="127.0" prefHeight="39.0" prefWidth="109.0" value="63.0" />
-      <Button fx:id="mappingButt82" layoutX="25.0" layoutY="150.0" mnemonicParsing="false" onAction="#mapCC82" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #DEDEDE; -fx-text-fill: #585858;" text="B CHANNEL" />
-      <Button fx:id="mappingButt83" layoutX="25.0" layoutY="201.0" mnemonicParsing="false" onAction="#mapCC83" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #DEDEDE; -fx-text-fill: #585858;" text="BRIGHTNESS" />
-      <Slider fx:id="slider83" blockIncrement="1.0" layoutX="133.0" layoutY="194.0" max="127.0" prefHeight="39.0" prefWidth="109.0" value="63.0" />
-      <Label fx:id="label80" layoutX="263.0" layoutY="46.0" prefHeight="27.0" prefWidth="36.0" text="63" textAlignment="CENTER" />
-      <Label fx:id="label81" layoutX="263.0" layoutY="99.0" prefHeight="27.0" prefWidth="36.0" text="63" textAlignment="CENTER" />
-      <Label fx:id="label82" layoutX="263.0" layoutY="149.0" prefHeight="27.0" prefWidth="36.0" text="63" textAlignment="CENTER" />
-      <Label fx:id="label83" layoutX="263.0" layoutY="200.0" prefHeight="27.0" prefWidth="36.0" text="63" textAlignment="CENTER" />
-      <Separator layoutX="299.0" orientation="VERTICAL" prefHeight="550.0" prefWidth="25.0" />
-      <Label fx:id="imageLabel" layoutX="538.0" layoutY="49.0" prefHeight="27.0" prefWidth="341.0" />
-      <Button fx:id="redFilterButton" layoutX="911.0" layoutY="98.0" mnemonicParsing="false" onAction="#filterRed" prefHeight="27.0" prefWidth="92.0" style="-fx-background-color: #DEDEDE; -fx-text-fill: #585858;" text="RED FILTER" />
-      <Button fx:id="greenFilterButton" layoutX="911.0" layoutY="149.0" mnemonicParsing="false" onAction="#filterGreen" prefHeight="27.0" prefWidth="92.0" style="-fx-background-color: #DEDEDE; -fx-text-fill: #585858;" text="GREEN FILTER" />
-      <Button fx:id="blueFilterButton" layoutX="911.0" layoutY="200.0" mnemonicParsing="false" onAction="#filterBlue" prefHeight="27.0" prefWidth="92.0" style="-fx-background-color: #DEDEDE; -fx-text-fill: #585858;" text="BLUE FILTER" />
-      <Button layoutX="911.0" layoutY="252.0" mnemonicParsing="false" onAction="#greyScale" prefHeight="27.0" prefWidth="92.0" style="-fx-background-color: #DEDEDE; -fx-text-fill: #585858;" text="GREYSCALE" />
-      <Button layoutX="911.0" layoutY="49.0" mnemonicParsing="false" onAction="#displayOriginal" prefHeight="27.0" prefWidth="92.0" style="-fx-background-color: #DEDEDE; -fx-text-fill: #585858;" text="ORIGINAL" />
-      <Slider fx:id="redFilterSlider" layoutX="1020.0" layoutY="105.0" max="255.0" prefHeight="14.0" prefWidth="92.0" />
-      <Slider fx:id="greenFilterSlider" layoutX="1020.0" layoutY="156.0" max="255.0" prefHeight="14.0" prefWidth="92.0" />
-      <Slider fx:id="blueFilterSlider" layoutX="1020.0" layoutY="203.0" max="255.0" prefHeight="14.0" prefWidth="92.0" />
-      <Slider fx:id="greyscaleSlider" layoutX="1020.0" layoutY="259.0" prefHeight="14.0" prefWidth="92.0" />
-      <Button fx:id="mappingButt84" layoutX="25.0" layoutY="254.0" mnemonicParsing="false" onAction="#mapCC84" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #DEDEDE; -fx-text-fill: #585858;" text="UNIQUE COLS" />
-      <Slider fx:id="slider84" blockIncrement="1.0" layoutX="133.0" layoutY="247.0" max="127.0" prefHeight="39.0" prefWidth="109.0" value="63.0" />
-      <Label fx:id="label84" layoutX="263.0" layoutY="253.0" prefHeight="27.0" prefWidth="36.0" text="63" textAlignment="CENTER" />
-      <Button layoutX="911.0" layoutY="301.0" mnemonicParsing="false" onAction="#showEdges" prefHeight="27.0" prefWidth="92.0" style="-fx-background-color: #DEDEDE; -fx-text-fill: #585858;" text="EDGES" />
-      <Slider fx:id="edgeDistance" layoutX="1020.0" layoutY="308.0" max="50.0" prefHeight="14.0" prefWidth="92.0" />
-      <Button fx:id="mappingButt85" layoutX="25.0" layoutY="302.0" mnemonicParsing="false" onAction="#mapCC85" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #DEDEDE; -fx-text-fill: #585858;" text="EDGES" />
-      <Slider fx:id="slider85" blockIncrement="1.0" layoutX="133.0" layoutY="296.0" max="127.0" prefHeight="39.0" prefWidth="109.0" value="63.0" />
-      <Label fx:id="label85" layoutX="263.0" layoutY="301.0" prefHeight="27.0" prefWidth="36.0" text="63" textAlignment="CENTER" />
-   </children>
+<AnchorPane fx:id="pane" focusTraversable="true" minHeight="490.0" minWidth="1190.0" prefHeight="490.0" prefWidth="1190.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="drawsoundfx.drawSoundFXMLController">
+    <children>
+      <AnchorPane id="imagePane" layoutX="14.0" layoutY="44.0" prefHeight="414.0" prefWidth="285.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="895.0" AnchorPane.topAnchor="40.0">
+         <children>
+            <Label id="imagePane" alignment="CENTER" contentDisplay="CENTER" layoutX="79.0" layoutY="7.0" prefHeight="25.0" prefWidth="130.0" text="MAPPING" AnchorPane.topAnchor="10.0" />
+              <Button fx:id="mappingButt80" accessibleRole="TOGGLE_BUTTON" layoutX="11.0" layoutY="51.0" mnemonicParsing="false" onAction="#mapCC80" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: #DEDEDE; -fx-text-fill: #585858;" text="R CHANNEL" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="50.0" />
+              <Slider fx:id="slider80" blockIncrement="1.0" layoutX="151.0" layoutY="51.0" max="127.0" prefHeight="27.0" prefWidth="90.0" value="63.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="50.0" />
+              <Label fx:id="label80" layoutX="250.0" layoutY="53.0" prefHeight="27.0" prefWidth="36.0" text="63" textAlignment="CENTER" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="50.0" />
+              <Button fx:id="mappingButt81" accessibleRole="TOGGLE_BUTTON" layoutX="11.0" layoutY="96.0" mnemonicParsing="false" onAction="#mapCC81" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: #DEDEDE; -fx-text-fill: #585858;" text="G CHANNEL" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="100.0" />
+              <Slider fx:id="slider81" blockIncrement="1.0" layoutX="151.0" layoutY="101.0" max="127.0" prefHeight="27.0" prefWidth="90.0" value="63.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="100.0" />
+              <Label fx:id="label81" layoutX="241.0" layoutY="101.0" prefHeight="27.0" prefWidth="36.0" text="63" textAlignment="CENTER" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="100.0" />
+              <Button fx:id="mappingButt82" accessibleRole="TOGGLE_BUTTON" layoutX="11.0" layoutY="149.0" mnemonicParsing="false" onAction="#mapCC82" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: #DEDEDE; -fx-text-fill: #585858;" text="B CHANNEL" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="150.0" />
+              <Slider fx:id="slider82" blockIncrement="1.0" max="127.0" prefHeight="27.0" prefWidth="90.0" value="63.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="150.0" />
+              <Label fx:id="label82" prefHeight="27.0" prefWidth="36.0" text="63" textAlignment="CENTER" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="150.0" />
+              <Button fx:id="mappingButt83" accessibleRole="TOGGLE_BUTTON" mnemonicParsing="false" onAction="#mapCC83" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: #DEDEDE; -fx-text-fill: #585858;" text="BRIGHTNESS" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="200.0" />
+              <Slider fx:id="slider83" blockIncrement="1.0" max="127.0" prefHeight="27.0" prefWidth="90.0" value="63.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="200.0" />
+              <Label fx:id="label83" prefHeight="27.0" prefWidth="36.0" text="63" textAlignment="CENTER" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="200.0" />
+              <Button fx:id="mappingButt84" accessibleRole="TOGGLE_BUTTON" mnemonicParsing="false" onAction="#mapCC84" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: #DEDEDE; -fx-text-fill: #585858;" text="UNIQUE COLS" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="250.0" />
+              <Slider fx:id="slider84" blockIncrement="1.0" layoutX="152.0" layoutY="252.0" max="127.0" prefHeight="27.0" prefWidth="90.0" value="63.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="250.0" />
+              <Label fx:id="label84" layoutX="234.0" layoutY="249.0" prefHeight="27.0" prefWidth="36.0" text="63" textAlignment="CENTER" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="250.0" />
+              <Button fx:id="mappingButt85" accessibleRole="TOGGLE_BUTTON" mnemonicParsing="false" onAction="#mapCC85" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: #DEDEDE; -fx-text-fill: #585858;" text="EDGES" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="300.0" />
+              <Slider fx:id="slider85" blockIncrement="1.0" max="127.0" prefHeight="27.0" prefWidth="90.0" value="63.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="300.0" />
+              <Label fx:id="label85" prefHeight="27.0" prefWidth="36.0" text="63" textAlignment="CENTER" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="300.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane id="imagePane" fx:id="imageViewPane" layoutX="314.0" layoutY="151.0" maxHeight="338.0" maxWidth="600.0" prefHeight="338.0" prefWidth="600.0" style="-fx-background-color: #eeeeee;" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="314.0" AnchorPane.rightAnchor="276.0" AnchorPane.topAnchor="40.0">
+         <children>
+            <Label id="imagePane" alignment="CENTER" contentDisplay="CENTER" layoutX="235.0" layoutY="14.0" prefHeight="25.0" prefWidth="130.0" text="IMAGE VIEW" AnchorPane.topAnchor="10.0" />
+              <Button layoutX="14.0" layoutY="47.0" mnemonicParsing="false" onAction="#selectImage" style="-fx-background-color: #DEDEDE; -fx-text-fill: #585858;" text="Select image..." AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="50.0" />
+              <Label id="imagePane" fx:id="imageLabel" prefHeight="27.0" prefWidth="423.0" AnchorPane.leftAnchor="155.0" AnchorPane.topAnchor="50.0" />
+              <ImageView fx:id="imgView" fitHeight="338.0" fitWidth="600.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0">
+               <viewport>
+                  <Rectangle2D />
+               </viewport></ImageView>
+            <AnchorPane fx:id="aboutPane" layoutX="167.0" layoutY="36.0" prefHeight="400.0" prefWidth="300.0" visible="false">
+               <children>
+                  <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="118.0" AnchorPane.topAnchor="15.0">
+                     <image>
+                        <Image url="@../resources/icon.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane id="imagePane" layoutX="896.0" layoutY="101.0" prefHeight="425.0" prefWidth="247.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="935.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="40.0">
+         <children>
+            <Label id="imagePane" alignment="CENTER" contentDisplay="CENTER" layoutX="59.0" layoutY="14.0" prefHeight="25.0" prefWidth="130.0" text="EFFECTS" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="10.0" />
+              <Button layoutX="59.0" layoutY="51.0" mnemonicParsing="false" onAction="#displayOriginal" prefHeight="27.0" prefWidth="130.0" style="-fx-background-color: #DEDEDE; -fx-text-fill: #585858;" text="ORIGINAL" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="50.0" />
+              <Button fx:id="redFilterButton" mnemonicParsing="false" onAction="#filterRed" prefHeight="27.0" prefWidth="130.0" style="-fx-background-color: #DEDEDE; -fx-text-fill: #585858;" text="RED FILTER" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="100.0" />
+              <Slider fx:id="redFilterSlider" max="255.0" prefHeight="14.0" prefWidth="92.0" visible="false" />
+              <Button fx:id="greenFilterButton" mnemonicParsing="false" onAction="#filterGreen" prefHeight="27.0" prefWidth="130.0" style="-fx-background-color: #DEDEDE; -fx-text-fill: #585858;" text="GREEN FILTER" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="150.0" />
+              <Slider fx:id="greenFilterSlider" max="255.0" prefHeight="14.0" prefWidth="92.0" visible="false" />
+              <Button fx:id="blueFilterButton" mnemonicParsing="false" onAction="#filterBlue" prefHeight="27.0" prefWidth="130.0" style="-fx-background-color: #DEDEDE; -fx-text-fill: #585858;" text="BLUE FILTER" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="200.0" />
+              <Slider fx:id="blueFilterSlider" max="255.0" prefHeight="14.0" prefWidth="92.0" visible="false" />
+              <Button fx:id="greyscaleButton" mnemonicParsing="false" onAction="#greyScale" prefHeight="27.0" prefWidth="130.0" style="-fx-background-color: #DEDEDE; -fx-text-fill: #585858;" text="GREYSCALE" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="250.0" />
+              <Slider fx:id="greyscaleSlider" prefHeight="14.0" prefWidth="92.0" visible="false" />
+              <Button fx:id="edgesButton" mnemonicParsing="false" onAction="#showEdges" prefHeight="27.0" prefWidth="92.0" style="-fx-background-color: #DEDEDE; -fx-text-fill: #585858;" text="EDGES" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="300.0" />
+              <Slider fx:id="edgeDistance" max="50.0" prefHeight="27.0" prefWidth="92.0" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="300.0" />
+         </children>
+      </AnchorPane>
+        <MenuBar layoutX="-4.0" layoutY="2.0" prefHeight="25.0" prefWidth="1145.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="New...">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                            </accelerator>
+                        </MenuItem>
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem disable="true" mnemonicParsing="false" text="Open project">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                            </accelerator>
+                        </MenuItem>
+                        <MenuItem disable="true" mnemonicParsing="false" text="Save project">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                            </accelerator>
+                        </MenuItem>
+                        <MenuItem disable="true" mnemonicParsing="false" text="Save project as...">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                            </accelerator>
+                        </MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#selectImage" text="Open image">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#exportImage" text="Export image as...">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                            </accelerator>
+                        </MenuItem>
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#quit" text="Close">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                            </accelerator>
+                        </MenuItem>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Help">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="H" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                            </accelerator>
+                        </MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#showAbout" text="About" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </children>
 </AnchorPane>
