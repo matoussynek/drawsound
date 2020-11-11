@@ -6,7 +6,9 @@ import rwmidi.MidiOutputDevice;
 import rwmidi.RWMidi;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -15,10 +17,13 @@ public class DrawSound {
     private TeVirtualMIDIPort midiPort;
     private final String MIDI_PORT_NAME = "drawSoundMidiPort";
     private MidiOutput device;
+    private MidiOutput defaultDevice;
     private boolean mapping = false;
     private AtomicInteger currentCCNumber = new AtomicInteger(0);
     private MappingThread mt;
     private Thread mappingThread;
+    private List<String> outputDevices = new ArrayList<>();
+    private MidiOutputDevice[] devices;
 
     private int rChannelCC = 0;
     private int gChannelCC = 0;
@@ -43,11 +48,15 @@ public class DrawSound {
 
         System.out.println("Virtual MIDI port created as: " + MIDI_PORT_NAME);
 
-        MidiOutputDevice devices[] = RWMidi.getOutputDevices();
+        devices = RWMidi.getOutputDevices();
         for (int i = 0; i < devices.length; i++) {
             if (devices[i].getName().contains(MIDI_PORT_NAME)) {
                 device = RWMidi.getOutputDevices()[i].createOutput();
+                defaultDevice = RWMidi.getOutputDevices()[i].createOutput();
                 System.out.println("Connected to: " + devices[i].getName());
+            }
+            else{
+                outputDevices.add(devices[i].getName());
             }
         }
     }
@@ -132,6 +141,23 @@ public class DrawSound {
         return oMin + (oMax - oMin) * ((var - iMin) / (iMax - iMin));
     }
 
+
+    public List<String> getOutputDevices() {
+        return outputDevices;
+    }
+
+    public void setExternalMidiOutput(String outputName){
+        for (int i = 0; i < devices.length; i++) {
+            if (devices[i].getName().contains(outputName)) {
+                device = RWMidi.getOutputDevices()[i].createOutput();
+                System.out.println("Connected to: " + devices[i].getName());
+            }
+        }
+    }
+    public void setDefaultMidiOutput(){
+        device = defaultDevice;
+        System.out.println("Connected to: " + device.getName());
+    }
 
     public int getrChannelCC() {
         return rChannelCC;

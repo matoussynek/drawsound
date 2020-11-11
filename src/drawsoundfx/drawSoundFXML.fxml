@@ -62,22 +62,22 @@
          <children>
             <Label id="imagePane" alignment="CENTER" contentDisplay="CENTER" layoutX="59.0" layoutY="14.0" prefHeight="25.0" prefWidth="130.0" text="EFFECTS" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="10.0" />
               <Button layoutX="59.0" layoutY="51.0" mnemonicParsing="false" onAction="#displayOriginal" prefHeight="27.0" prefWidth="130.0" style="-fx-background-color: #DEDEDE; -fx-text-fill: #585858;" text="ORIGINAL" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="50.0" />
-            <Label id="imagePane" alignment="CENTER" contentDisplay="CENTER" layoutX="17.0" layoutY="97.0" prefHeight="25.0" prefWidth="100.0" text="RED FILTER" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="100.0" />
-              <Slider fx:id="redFilterSlider" layoutX="117.0" layoutY="102.0" prefHeight="25.0" prefWidth="80.0" AnchorPane.leftAnchor="116.0" AnchorPane.topAnchor="101.0" />
-            <Label fx:id="redFilterLabel" layoutX="185.0" layoutY="100.0" prefHeight="27.0" prefWidth="36.0" text="0" textAlignment="CENTER" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="100.0" />
-            <Label id="imagePane" alignment="CENTER" contentDisplay="CENTER" layoutX="26.0" layoutY="111.0" prefHeight="25.0" prefWidth="100.0" text="GREEN FILTER" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="150.0" />
-              <Slider fx:id="greenFilterSlider" layoutX="117.0" layoutY="152.0" prefHeight="25.0" prefWidth="80.0" AnchorPane.leftAnchor="116.0" AnchorPane.topAnchor="151.0" />
-            <Label id="imagePane" alignment="CENTER" contentDisplay="CENTER" layoutX="36.0" layoutY="121.0" prefHeight="25.0" prefWidth="100.0" text="BLUE FILTER" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="200.0" />
-              <Slider fx:id="blueFilterSlider" layoutX="117.0" layoutY="202.0" prefHeight="25.0" prefWidth="80.0" AnchorPane.leftAnchor="116.0" AnchorPane.topAnchor="201.0" />
-            <Label id="imagePane" alignment="CENTER" contentDisplay="CENTER" layoutX="46.0" layoutY="131.0" prefHeight="25.0" prefWidth="100.0" text="GREYSCALE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="250.0" />
-              <Slider fx:id="greyscaleSlider" layoutX="117.0" layoutY="252.0" prefHeight="25.0" prefWidth="80.0" AnchorPane.leftAnchor="116.0" AnchorPane.topAnchor="251.0" />
-              <Button fx:id="edgesButton" mnemonicParsing="false" onAction="#showEdges" prefHeight="27.0" prefWidth="92.0" style="-fx-background-color: #DEDEDE; -fx-text-fill: #585858;" text="EDGES" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="300.0" />
-              <Slider fx:id="edgeDistance" layoutX="117.0" layoutY="302.0" max="50.0" prefHeight="27.0" prefWidth="80.0" AnchorPane.leftAnchor="116.0" AnchorPane.topAnchor="301.0" />
+            <Label id="imagePane" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="100.0" prefHeight="25.0" prefWidth="100.0" text="RED FILTER" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="100.0" />
+              <Slider fx:id="redFilterSlider" layoutX="120.0" layoutY="101.0" prefHeight="25.0" prefWidth="80.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="101.0" />
+            <Label fx:id="redFilterLabel" layoutX="204.0" layoutY="100.0" prefHeight="27.0" prefWidth="36.0" text="0" textAlignment="CENTER" AnchorPane.leftAnchor="204.0" AnchorPane.topAnchor="100.0" />
+            <Label id="imagePane" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="150.0" prefHeight="25.0" prefWidth="100.0" text="GREEN FILTER" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="150.0" />
+              <Slider fx:id="greenFilterSlider" layoutX="120.0" layoutY="151.0" prefHeight="25.0" prefWidth="80.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="151.0" />
+            <Label id="imagePane" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="200.0" prefHeight="25.0" prefWidth="100.0" text="BLUE FILTER" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="200.0" />
+              <Slider fx:id="blueFilterSlider" layoutX="120.0" layoutY="201.0" prefHeight="25.0" prefWidth="80.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="201.0" />
+            <Label id="imagePane" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="250.0" prefHeight="25.0" prefWidth="100.0" text="GREYSCALE" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="250.0" />
+              <Slider fx:id="greyscaleSlider" layoutX="120.0" layoutY="251.0" prefHeight="25.0" prefWidth="80.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="251.0" />
+              <Button fx:id="edgesButton" layoutX="14.0" layoutY="300.0" mnemonicParsing="false" onAction="#showEdges" prefHeight="27.0" prefWidth="92.0" style="-fx-background-color: #DEDEDE; -fx-text-fill: #585858;" text="EDGES" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="300.0" />
+              <Slider fx:id="edgeDistance" layoutX="120.0" layoutY="301.0" max="50.0" prefHeight="27.0" prefWidth="80.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="301.0" />
             <Button layoutX="24.0" layoutY="358.0" mnemonicParsing="false" onAction="#processEffects" prefHeight="27.0" prefWidth="130.0" text="PROCESS" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="370.0" />
-            <Label fx:id="greenFilterLabel" layoutX="201.0" layoutY="150.0" prefHeight="27.0" prefWidth="36.0" text="0" textAlignment="CENTER" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="150.0" />
-            <Label fx:id="blueFilterLabel" layoutX="201.0" layoutY="200.0" prefHeight="27.0" prefWidth="36.0" text="0" textAlignment="CENTER" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="200.0" />
-            <Label fx:id="greyscaleLabel" layoutX="211.0" layoutY="210.0" prefHeight="27.0" prefWidth="36.0" text="0" textAlignment="CENTER" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="250.0" />
-            <Label fx:id="edgeStrengthLabel" layoutX="221.0" layoutY="220.0" prefHeight="27.0" prefWidth="36.0" text="0" textAlignment="CENTER" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="300.0" />
+            <Label fx:id="greenFilterLabel" layoutX="204.0" layoutY="150.0" prefHeight="27.0" prefWidth="36.0" text="0" textAlignment="CENTER" AnchorPane.leftAnchor="204.0" AnchorPane.topAnchor="150.0" />
+            <Label fx:id="blueFilterLabel" layoutX="204.0" layoutY="200.0" prefHeight="27.0" prefWidth="36.0" text="0" textAlignment="CENTER" AnchorPane.leftAnchor="204.0" AnchorPane.topAnchor="200.0" />
+            <Label fx:id="greyscaleLabel" layoutX="204.0" layoutY="250.0" prefHeight="27.0" prefWidth="36.0" text="0" textAlignment="CENTER" AnchorPane.leftAnchor="204.0" AnchorPane.topAnchor="250.0" />
+            <Label fx:id="edgeStrengthLabel" layoutX="204.0" layoutY="300.0" prefHeight="27.0" prefWidth="36.0" text="0" textAlignment="CENTER" AnchorPane.leftAnchor="204.0" AnchorPane.topAnchor="300.0" />
          </children>
       </AnchorPane>
         <MenuBar layoutX="-4.0" layoutY="2.0" prefHeight="25.0" prefWidth="1145.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -89,6 +89,11 @@
                                 <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                             </accelerator>
                         </MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#setMidiOutput" text="Settings">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="COMMA" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
                         <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" onAction="#selectImage" text="Open image">
                      <accelerator>

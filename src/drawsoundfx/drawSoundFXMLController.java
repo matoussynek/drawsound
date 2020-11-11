@@ -9,7 +9,10 @@ import drawsoundfx.utils.*;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -91,6 +94,8 @@ public class drawSoundFXMLController implements Initializable {
 
     private boolean edgesDisplayed = false;
 
+    private String selectedExternalDevice = null;
+
     private BufferedImage originalImage;
     private BufferedImage displayedImage;
     private BufferedImage tempImage;
@@ -169,6 +174,118 @@ public class drawSoundFXMLController implements Initializable {
                 greyscaleLabel.setText(String.valueOf(newValue.intValue()));
             }
         });
+    }
+
+    @FXML
+    public void setMidiOutput(){
+        final Stage midiOutput = new Stage();
+        midiOutput.setTitle("About");
+        midiOutput.initModality(Modality.APPLICATION_MODAL);
+        midiOutput.initOwner(stage);
+        AnchorPane midiOutputPane = new AnchorPane();
+        midiOutputPane.getStylesheets().add("/resources/styles/styles.css");
+
+        AnchorPane designBorder = new AnchorPane();
+        designBorder.setPrefSize(420,470);
+        designBorder.setLayoutX(15);
+        designBorder.setLayoutY(15);
+        designBorder.setId("imagePane");
+        midiOutputPane.getChildren().add(designBorder);
+
+        Label title = new Label();
+        title.setPrefSize(390, 45);
+        title.setLayoutX(30);
+        title.setLayoutY(25);
+        title.setText("MIDI OUTPUT SETTINGS");
+        title.setAlignment(Pos.CENTER);
+        title.setStyle("-fx-font-size: 22px!important;");
+        midiOutputPane.getChildren().add(title);
+
+        RadioButton defaultButton = new RadioButton();
+        defaultButton.setLayoutX(35);
+        defaultButton.setLayoutY(90);
+        defaultButton.setText("Select default MIDI output (recommended)");
+        defaultButton.setSelected(true);
+        midiOutputPane.getChildren().add(defaultButton);
+
+        RadioButton externalButton = new RadioButton();
+        externalButton.setLayoutX(35);
+        externalButton.setLayoutY(125);
+        externalButton.setText("External MIDI outputs");
+        midiOutputPane.getChildren().add(externalButton);
+
+        ToggleGroup tg = new ToggleGroup();
+        tg.getToggles().addAll(defaultButton, externalButton);
+
+        ListView<String> listView = new ListView<>();
+        ObservableList<String> outputList = FXCollections.<String>observableArrayList(drawSound.getOutputDevices());
+        listView.setItems(outputList);
+        listView.setPrefSize(350, 270);
+        listView.setLayoutX(50);
+        listView.setLayoutY(155);
+        listView.setDisable(true);
+        listView.setId("imagePane");
+        midiOutputPane.getChildren().add(listView);
+
+        defaultButton.selectedProperty().addListener(
+                (ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) ->{
+                    if (new_val){
+                        listView.setDisable(true);
+                        selectedExternalDevice = null;
+                    }
+                    else{
+                        listView.setDisable(false);
+                    }
+                });
+
+        Button applyButton = new Button();
+        applyButton.setPrefSize(100,25);
+        applyButton.setLayoutX(200);
+        applyButton.setLayoutY(440);
+        applyButton.setText("APPLY");
+        applyButton.setDefaultButton(true);
+        midiOutputPane.getChildren().add(applyButton);
+
+        applyButton.setOnAction(new EventHandler() {
+            @Override
+            public void handle(Event event) {
+                if (externalButton.isSelected()) {
+                    if (listView.getSelectionModel().getSelectedItem() != null){
+                        selectedExternalDevice = listView.getSelectionModel().getSelectedItem();
+                        drawSound.setExternalMidiOutput(selectedExternalDevice);
+                    }
+                }
+                else {
+                    drawSound.setDefaultMidiOutput();
+                }
+                midiOutput.close();
+            }
+        });
+
+        Button cancelButton = new Button();
+        cancelButton.setPrefSize(100,25);
+        cancelButton.setLayoutX(315);
+        cancelButton.setLayoutY(440);
+        cancelButton.setText("CANCEL");
+        midiOutputPane.getChildren().add(cancelButton);
+
+        cancelButton.setOnAction(new EventHandler() {
+            @Override
+            public void handle(Event event) {
+                midiOutput.close();
+            }
+        });
+
+        if (selectedExternalDevice != null){
+            externalButton.setSelected(true);
+            listView.getSelectionModel().select(selectedExternalDevice);
+        }
+
+        Scene dialogScene = new Scene(midiOutputPane, 440, 490);
+        midiOutput.setScene(dialogScene);
+        midiOutput.getIcons().add(stage.getIcons().get(0));
+        midiOutput.setResizable(false);
+        midiOutput.show();
     }
 
     @FXML
