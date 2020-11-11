@@ -55,6 +55,10 @@ public class drawSoundFXMLController implements Initializable {
     public Slider slider83;
     public Slider slider84;
     public Slider slider85;
+    public Slider redFilterSlider;
+    public Slider greenFilterSlider;
+    public Slider blueFilterSlider;
+    public Slider greyscaleSlider;
     public Slider edgeDistance;
     public Button mappingButt80;
     public Button mappingButt81;
@@ -69,19 +73,21 @@ public class drawSoundFXMLController implements Initializable {
     public Label label84;
     public Label label85;
     public Label imageLabel;
+    public Label redFilterLabel;
+    public Label greenFilterLabel;
+    public Label blueFilterLabel;
+    public Label greyscaleLabel;
+    public Label edgeStrengthLabel;
     public ImageView imgView;
     public AnchorPane pane;
     public AnchorPane imageViewPane;
-    public Button redFilterButton;
-    public Button greenFilterButton;
-    public Button blueFilterButton;
-    public Button greyscaleButton;
     public Button edgesButton;
 
     private Stage stage;
-    private int redFilter = 0xFF0000;
-    private int greenFilter = 0xFF00;
-    private int blueFilter = 0xFF;
+    private int redFilter = 100;
+    private int greenFilter = 100;
+    private int blueFilter = 100;
+    private int greyscaleFilter = 0;
 
     private boolean edgesDisplayed = false;
 
@@ -124,6 +130,43 @@ public class drawSoundFXMLController implements Initializable {
             public void changed(
                     ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
                 drawSound.setEdgeStrength(newValue.doubleValue());
+                edgeStrengthLabel.setText(String.format("%.2f", newValue.doubleValue()));
+            }
+        });
+        redFilterSlider.valueProperty().addListener(new ChangeListener<Number>() {
+
+            @Override
+            public void changed(
+                    ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
+                redFilter = 100 - newValue.intValue();
+                redFilterLabel.setText(String.valueOf(newValue.intValue()));
+            }
+        });
+        greenFilterSlider.valueProperty().addListener(new ChangeListener<Number>() {
+
+            @Override
+            public void changed(
+                    ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
+                greenFilter = 100 - newValue.intValue();
+                greenFilterLabel.setText(String.valueOf(newValue.intValue()));
+            }
+        });
+        blueFilterSlider.valueProperty().addListener(new ChangeListener<Number>() {
+
+            @Override
+            public void changed(
+                    ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
+                blueFilter = 100 - newValue.intValue();
+                blueFilterLabel.setText(String.valueOf(newValue.intValue()));
+            }
+        });
+        greyscaleSlider.valueProperty().addListener(new ChangeListener<Number>() {
+
+            @Override
+            public void changed(
+                    ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
+                greyscaleFilter = newValue.intValue();
+                greyscaleLabel.setText(String.valueOf(newValue.intValue()));
             }
         });
     }
@@ -241,63 +284,10 @@ public class drawSoundFXMLController implements Initializable {
             return;
         }
         displayImage(originalImage);
-    }
-
-    @FXML
-    public void filterRed() {
-        if (originalImage == null) {
-            System.err.println("Image not selected...");
-            return;
-        }
-        if (redFilter == 0) {
-            redFilter = 0xFF0000;
-            redFilterButton.setStyle("-fx-background-color: #DEDEDE;-fx-text-fill:  #585858;");
-        } else {
-            redFilter = 0;
-            redFilterButton.setStyle("-fx-background-color: #546a7b;-fx-text-fill:  #DEDEDE;");
-        }
-        int mask = 0xFF000000 + redFilter + greenFilter + blueFilter;
-        System.out.println("red mask " + mask);
-        displayImage(ImageProcessing.createColorImage(originalImage, mask));
-    }
-
-    @FXML
-    public void filterGreen() {
-        if (originalImage == null) {
-            System.err.println("Image not selected...");
-            return;
-        }
-        if (greenFilter == 0) {
-            greenFilter = 0xFF00;
-            greenFilterButton.setStyle("-fx-background-color: #DEDEDE;-fx-text-fill:  #585858;");
-        } else {
-            greenFilter = 0;
-            greenFilterButton.setStyle("-fx-background-color: #546a7b;-fx-text-fill:  #DEDEDE;");
-        }
-        int mask = 0xFF000000 + redFilter + greenFilter + blueFilter;
-        displayImage(ImageProcessing.createColorImage(originalImage, mask));
-    }
-
-    @FXML
-    public void filterBlue() {
-        if (originalImage == null) {
-            System.err.println("Image not selected...");
-            return;
-        }
-        if (blueFilter == 0) {
-            blueFilter = 0xFF;
-            blueFilterButton.setStyle("-fx-background-color: #DEDEDE;-fx-text-fill:  #585858;");
-        } else {
-            blueFilter = 0;
-            blueFilterButton.setStyle("-fx-background-color: #546a7b;-fx-text-fill:  #DEDEDE;");
-        }
-        int mask = 0xFF000000 + redFilter + greenFilter + blueFilter;
-        displayImage(ImageProcessing.createColorImage(originalImage, mask));
-    }
-
-    @FXML
-    public void greyScale() {
-        displayImage(ImageProcessing.getGreyScaleImage(originalImage));
+        redFilterSlider.setValue(0);
+        greenFilterSlider.setValue(0);
+        blueFilterSlider.setValue(0);
+        greyscaleSlider.setValue(0);
     }
 
     @FXML
@@ -317,6 +307,16 @@ public class drawSoundFXMLController implements Initializable {
             edgesButton.setStyle("-fx-background-color: #DEDEDE;-fx-text-fill:  #585858;");
             displayImage(tempImage);
         }
+    }
+
+    @FXML
+    public void processEffects(){
+        if (originalImage == null) {
+            System.err.println("Image not selected...");
+            return;
+        }
+        displayImage(ImageProcessing.createColorImage(originalImage, redFilter, greenFilter, blueFilter));
+        displayImage(ImageProcessing.getGreyScaleImage(displayedImage, greyscaleFilter));
     }
 
 

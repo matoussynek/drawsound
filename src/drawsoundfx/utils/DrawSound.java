@@ -87,9 +87,7 @@ public class DrawSound {
     }
 
     public void processImage(BufferedImage image) {
-        System.out.println("Start processing...");
         createHistogram(image);
-        System.out.println("End processing...");
     }
 
     private void createHistogram(BufferedImage image) {
@@ -99,7 +97,6 @@ public class DrawSound {
         gChannelCC = 0;
         bChannelCC = 0;
         uniqueColsSet = new HashSet<>();
-        System.out.println("Start image buffering...");
         for (int x = 0; x < image.getWidth(); x++)
             for (int y = 0; y < image.getHeight(); y++) {
                 int color = image.getRGB(x, y);
@@ -119,7 +116,6 @@ public class DrawSound {
                     gChannelCC += j * colorHistogram[i][j][p];
                     bChannelCC += p * colorHistogram[i][j][p];
                 }
-        System.out.println("End image buffering...");
         int colorSum = rChannelCC + gChannelCC + bChannelCC;
         rChannelCC = (int) map(rChannelCC, 0, colorSum, 0, 127);
         gChannelCC = (int) map(gChannelCC, 0, colorSum, 0, 127);
