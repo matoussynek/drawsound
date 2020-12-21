@@ -1,15 +1,13 @@
 package drawsoundfx.utils;
 
 import javafx.scene.control.Button;
+import javafx.util.Pair;
 import rwmidi.MidiOutput;
 import rwmidi.MidiOutputDevice;
 import rwmidi.RWMidi;
 
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class DrawSound {
@@ -19,7 +17,7 @@ public class DrawSound {
     private MidiOutput device;
     private MidiOutput defaultDevice;
     private boolean mapping = false;
-    private AtomicInteger currentCCNumber = new AtomicInteger(0);
+    private String currentCistic = null;
     private MappingThread mt;
     private Thread mappingThread;
     private List<String> outputDevices = new ArrayList<>();
@@ -35,10 +33,17 @@ public class DrawSound {
     private int[][][] colorHistogram;
     private Set<Integer> uniqueColsSet = new HashSet<>();
     private double edgeStrength = 0.0;
+    private Map<String, Pair<Integer,Integer>> ccMapping = new HashMap<>();
 
     private EdgeDetection detector = new EdgeDetection();
 
     public DrawSound() {
+        ccMapping.put("red", new Pair<>(80,1));
+        ccMapping.put("green", new Pair<>(81,1));
+        ccMapping.put("blue", new Pair<>(82,1));
+        ccMapping.put("brightness", new Pair<>(83,1));
+        ccMapping.put("diversity", new Pair<>(84,1));
+        ccMapping.put("edges", new Pair<>(85,1));
     }
 
     public void initialize() {
@@ -61,21 +66,21 @@ public class DrawSound {
         }
     }
 
-    public void mapCC(int CCNumber, Button button) {
+    public void mapCC(String cstic, Button button) {
 
-        if (CCNumber == currentCCNumber.get() || currentCCNumber.get() == 0) {
+        if (cstic.equals(currentCistic) || currentCistic == null) {
             if (mapping) {
                 mt.stop();
                 mapping = false;
-                button.setStyle("-fx-background-color: #DEDEDE;-fx-text-fill:  #585858;");
-                currentCCNumber.set(0);
+                button.setStyle("-fx-background-color: #CECECE!important;-fx-text-fill:  #585858;");
+                currentCistic = null;
             } else {
-                currentCCNumber.set(CCNumber);
-                mt = new MappingThread(device, 1, CCNumber);
+                currentCistic = cstic;
+                mt = new MappingThread(device, ccMapping.get(cstic).getValue(), ccMapping.get(cstic).getKey());
                 mappingThread = new Thread(mt);
                 mappingThread.start();
                 mapping = true;
-                button.setStyle("-fx-background-color: #546a7b;-fx-text-fill:  #DEDEDE;");
+                button.setStyle("-fx-background-color: #546a7b!important;-fx-text-fill:  #DEDEDE;");
 
             }
         }
@@ -193,5 +198,23 @@ public class DrawSound {
 
     public TeVirtualMIDIPort getMidiPort() {
         return midiPort;
+    }
+
+    public String getOutputDeviceString() {
+        if (device.getName().contains(MIDI_PORT_NAME))
+            return null;
+        return device.getName();
+    }
+
+    public void setCcMapping(int rn, int rc, int gn, int gc, int bn, int bc, int brn, int brc, int dn, int dc, int en, int ec) {
+        ccMapping.replace("red", new Pair<>(rn,rc));
+        ccMapping.replace("green", new Pair<>(gn,gc));
+        ccMapping.replace("blue", new Pair<>(bn,bc));
+        ccMapping.replace("brightness", new Pair<>(brn,brc));
+        ccMapping.replace("diversity", new Pair<>(dn,dc));
+        ccMapping.replace("edges", new Pair<>(en,ec));
+    }
+    public Map<String, Pair<Integer, Integer>> getCcMapping(){
+        return ccMapping;
     }
 }

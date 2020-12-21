@@ -6,12 +6,25 @@
 }
 
 .button{
-    -fx-background-color:  #DEDEDE;
+    -fx-background-color:  #CECECE!important;
     -fx-text-fill:  #585858;
     -fx-font-family: 'IBM Plex Mono', monospace !important;
     -fx-border-color: rgba(88,88,88,0.5)!important;
     -fx-border-width: 1px 1px 1px 1px!important;
     -fx-border-radius: 2.5px!important;
+
+}
+#box{
+    -fx-background-color:  #DEDEDE!important;
+    -fx-text-fill:  #585858;
+    -fx-font-family: 'IBM Plex Mono', monospace !important;
+    -fx-border-color: rgba(88,88,88,0.5)!important;
+    -fx-border-width: 1px 1px 1px 1px!important;
+    -fx-border-radius: 2.5px!important;
+}
+
+.button:hover{
+    -fx-cursor: hand;
 }
 
 .label{
@@ -25,6 +38,10 @@
     -fx-border-color: rgba(88,88,88,0.5)!important;
     -fx-border-width: 1px 1px 1px 1px!important;
     -fx-border-radius: 2.5px!important;
+    -fx-background-color:  #EDEDED!important;
+}
+#background{
+    -fx-background-color:  rgba(188,121,113,0.2)!important;/*#FBD2D7!important;*/
 }
 .menu .label{
     -fx-text-fill:  #585858!important;
@@ -54,5 +71,11 @@
     -fx-border-insets: 1;
     -fx-border-width: 1;
     -fx-border-radius: 2;
+}
+#title{
+    -fx-font-size: 22px!important;
+    -fx-border-color: rgba(88,88,88,0.5)!important;
+    -fx-border-width: 1px 1px 1px 1px!important;
+    -fx-border-radius: 2.5px!important;
 }
 

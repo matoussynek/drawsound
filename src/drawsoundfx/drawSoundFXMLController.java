@@ -9,14 +9,11 @@ import drawsoundfx.utils.*;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -24,23 +21,12 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
-import javafx.stage.FileChooser;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
+import javafx.stage.*;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -135,7 +121,8 @@ public class drawSoundFXMLController implements Initializable {
             public void changed(
                     ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
                 drawSound.setEdgeStrength(newValue.doubleValue());
-                edgeStrengthLabel.setText(String.format("%.2f", newValue.doubleValue()));
+                int percentage = (int) ((newValue.doubleValue() / edgeDistance.getMax())*100);
+                edgeStrengthLabel.setText(String.valueOf(percentage)/*String.format("%.2f", newValue.doubleValue())*/);
             }
         });
         redFilterSlider.valueProperty().addListener(new ChangeListener<Number>() {
@@ -177,145 +164,33 @@ public class drawSoundFXMLController implements Initializable {
     }
 
     @FXML
-    public void setMidiOutput(){
-        final Stage midiOutput = new Stage();
-        midiOutput.setTitle("About");
-        midiOutput.initModality(Modality.APPLICATION_MODAL);
-        midiOutput.initOwner(stage);
-        AnchorPane midiOutputPane = new AnchorPane();
-        midiOutputPane.getStylesheets().add("/resources/styles/styles.css");
-
-        AnchorPane designBorder = new AnchorPane();
-        designBorder.setPrefSize(420,470);
-        designBorder.setLayoutX(15);
-        designBorder.setLayoutY(15);
-        designBorder.setId("imagePane");
-        midiOutputPane.getChildren().add(designBorder);
-
-        Label title = new Label();
-        title.setPrefSize(390, 45);
-        title.setLayoutX(30);
-        title.setLayoutY(25);
-        title.setText("MIDI OUTPUT SETTINGS");
-        title.setAlignment(Pos.CENTER);
-        title.setStyle("-fx-font-size: 22px!important;");
-        midiOutputPane.getChildren().add(title);
-
-        RadioButton defaultButton = new RadioButton();
-        defaultButton.setLayoutX(35);
-        defaultButton.setLayoutY(90);
-        defaultButton.setText("Select default MIDI output (recommended)");
-        defaultButton.setSelected(true);
-        midiOutputPane.getChildren().add(defaultButton);
-
-        RadioButton externalButton = new RadioButton();
-        externalButton.setLayoutX(35);
-        externalButton.setLayoutY(125);
-        externalButton.setText("External MIDI outputs");
-        midiOutputPane.getChildren().add(externalButton);
-
-        ToggleGroup tg = new ToggleGroup();
-        tg.getToggles().addAll(defaultButton, externalButton);
-
-        ListView<String> listView = new ListView<>();
-        ObservableList<String> outputList = FXCollections.<String>observableArrayList(drawSound.getOutputDevices());
-        listView.setItems(outputList);
-        listView.setPrefSize(350, 270);
-        listView.setLayoutX(50);
-        listView.setLayoutY(155);
-        listView.setDisable(true);
-        listView.setId("imagePane");
-        midiOutputPane.getChildren().add(listView);
-
-        defaultButton.selectedProperty().addListener(
-                (ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) ->{
-                    if (new_val){
-                        listView.setDisable(true);
-                        selectedExternalDevice = null;
-                    }
-                    else{
-                        listView.setDisable(false);
-                    }
-                });
-
-        Button applyButton = new Button();
-        applyButton.setPrefSize(100,25);
-        applyButton.setLayoutX(200);
-        applyButton.setLayoutY(440);
-        applyButton.setText("APPLY");
-        applyButton.setDefaultButton(true);
-        midiOutputPane.getChildren().add(applyButton);
-
-        applyButton.setOnAction(new EventHandler() {
-            @Override
-            public void handle(Event event) {
-                if (externalButton.isSelected()) {
-                    if (listView.getSelectionModel().getSelectedItem() != null){
-                        selectedExternalDevice = listView.getSelectionModel().getSelectedItem();
-                        drawSound.setExternalMidiOutput(selectedExternalDevice);
-                    }
-                }
-                else {
-                    drawSound.setDefaultMidiOutput();
-                }
-                midiOutput.close();
-            }
-        });
-
-        Button cancelButton = new Button();
-        cancelButton.setPrefSize(100,25);
-        cancelButton.setLayoutX(315);
-        cancelButton.setLayoutY(440);
-        cancelButton.setText("CANCEL");
-        midiOutputPane.getChildren().add(cancelButton);
-
-        cancelButton.setOnAction(new EventHandler() {
-            @Override
-            public void handle(Event event) {
-                midiOutput.close();
-            }
-        });
-
-        if (selectedExternalDevice != null){
-            externalButton.setSelected(true);
-            listView.getSelectionModel().select(selectedExternalDevice);
-        }
-
-        Scene dialogScene = new Scene(midiOutputPane, 440, 490);
-        midiOutput.setScene(dialogScene);
-        midiOutput.getIcons().add(stage.getIcons().get(0));
-        midiOutput.setResizable(false);
-        midiOutput.show();
-    }
-
-    @FXML
     public void mapCC80() {
-        drawSound.mapCC(80, mappingButt80);
+        drawSound.mapCC("red", mappingButt80);
     }
 
     @FXML
     public void mapCC81() {
-        drawSound.mapCC(81, mappingButt81);
+        drawSound.mapCC("green", mappingButt81);
     }
 
     @FXML
     public void mapCC82() {
-        drawSound.mapCC(82, mappingButt82);
+        drawSound.mapCC("blue", mappingButt82);
     }
 
     @FXML
     public void mapCC83() {
-        drawSound.mapCC(83, mappingButt83);
+        drawSound.mapCC("brightness", mappingButt83);
     }
 
     @FXML
     public void mapCC84() {
-        drawSound.mapCC(84, mappingButt84);
+        drawSound.mapCC("diversity", mappingButt84);
     }
 
     @FXML
     public void mapCC85() {
-        drawSound.mapCC(85, mappingButt85);
+        drawSound.mapCC("edges", mappingButt85);
     }
 
     @FXML
@@ -416,18 +291,28 @@ public class drawSoundFXMLController implements Initializable {
         if (!edgesDisplayed) {
             tempImage = displayedImage;
             BufferedImage edges = drawSound.getEdgesImage(displayedImage);
-            edgesButton.setStyle("-fx-background-color: #546a7b;-fx-text-fill:  #DEDEDE;");
+            edgesButton.setStyle("-fx-background-color: #546a7b!important;-fx-text-fill:  #DEDEDE;");
             displayImage(edges);
             edgesDisplayed = true;
         } else {
             edgesDisplayed = false;
-            edgesButton.setStyle("-fx-background-color: #DEDEDE;-fx-text-fill:  #585858;");
+            edgesButton.setStyle("-fx-background-color: #CECECE!important;-fx-text-fill:  #585858;");
             displayImage(tempImage);
         }
     }
 
     @FXML
-    public void processEffects(){
+    public void updateEdgeDistance() {
+        if (edgesDisplayed) {
+            drawSound.setEdgeStrength(edgeDistance.getValue());
+            BufferedImage edges = drawSound.getEdgesImage(tempImage);
+            displayImage(edges);
+        }
+
+    }
+
+    @FXML
+    public void processEffects() {
         if (originalImage == null) {
             System.err.println("Image not selected...");
             return;
@@ -480,97 +365,49 @@ public class drawSoundFXMLController implements Initializable {
     }
 
     @FXML
-    public void showAbout(){
-        final Stage about = new Stage();
-        about.setTitle("About");
-        about.initModality(Modality.APPLICATION_MODAL);
-        about.initOwner(stage);
-        AnchorPane aboutPane = new AnchorPane();
-        aboutPane.getStylesheets().add("/resources/styles/styles.css");
+    public void setMidiOutput() {
 
-        AnchorPane designBorder = new AnchorPane();
-        designBorder.setPrefSize(270,270);
-        designBorder.setLayoutX(15);
-        designBorder.setLayoutY(15);
-        designBorder.setId("imagePane");
-        aboutPane.getChildren().add(designBorder);
+        try {
+            FXMLLoader root = new FXMLLoader(getClass().getResource("settingsFXML.fxml"));
+            Parent parent = (Parent) root.load();
+            Scene scene = new Scene(parent);
+            final Stage settingsStage = new Stage();
+            settingsStage.initStyle(StageStyle.UNDECORATED);
+            settingsStage.initModality(Modality.APPLICATION_MODAL);
+            settingsStage.initOwner(stage);
+            settingsStage.setScene(scene);
+            settingsStage.setResizable(false);
 
-        ImageView aboutImageView = new ImageView();
-        aboutImageView.setImage(stage.getIcons().get(0));
-        aboutImageView.setFitHeight(64);
-        aboutImageView.setFitWidth(64);
-        aboutImageView.setX(118);
-        aboutImageView.setY(40);
-        aboutPane.getChildren().add(aboutImageView);
+            settingsFXMLController controller = root.getController();
+            controller.setStage(settingsStage);
+            controller.init(drawSound, drawSound.getOutputDeviceString());
 
-        Label aboutText = new Label();
-        aboutText.setPrefSize(270, 50);
-        aboutText.setLayoutX(15);
-        aboutText.setLayoutY(125);
-        aboutText.setAlignment(Pos.TOP_CENTER);
-        aboutText.setText("   DrawSound\n" +
-                          "by Matouš Synek");
-        aboutPane.getChildren().add(aboutText);
+            settingsStage.show();
 
-        Label githubText = new Label();
-        githubText.setPrefSize(90, 25);
-        githubText.setLayoutX(70);
-        githubText.setLayoutY(190);
-        githubText.setText("GitHub.com");
-        aboutPane.getChildren().add(githubText);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        Hyperlink githubLink = new Hyperlink();
-        githubLink.setPrefSize(50, 25);
-        githubLink.setLayoutX(175);
-        githubLink.setLayoutY(190);
-        githubLink.setText("link");
-        githubLink.setAlignment(Pos.CENTER);
-        githubLink.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                try {
-                    Desktop.getDesktop().browse(new URI("https://github.com/matoussynek/drawsound"));
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                } catch (URISyntaxException uriSyntaxException) {
-                    uriSyntaxException.printStackTrace();
-                }
-            }
-        });
-        aboutPane.getChildren().add(githubLink);
 
-        Label youtubeText = new Label();
-        youtubeText.setPrefSize(90, 25);
-        youtubeText.setLayoutX(70);
-        youtubeText.setLayoutY(230);
-        youtubeText.setText("YouTube.com");
-        aboutPane.getChildren().add(youtubeText);
+    }
 
-        Hyperlink youtubeLink = new Hyperlink();
-        youtubeLink.setPrefSize(50, 25);
-        youtubeLink.setLayoutX(175);
-        youtubeLink.setLayoutY(230);
-        youtubeLink.setText("link");
-        youtubeLink.setAlignment(Pos.CENTER);
-        youtubeLink.setBorder(githubLink.getBorder());
-        youtubeLink.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                try {
-                    Desktop.getDesktop().browse(new URI("https://www.youtube.com/channel/UClhcolDHv14KyoifGi6ufdg?view_as=subscriber"));
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                } catch (URISyntaxException uriSyntaxException) {
-                    uriSyntaxException.printStackTrace();
-                }
-            }
-        });
-        aboutPane.getChildren().add(youtubeLink);
+    @FXML
+    public void showAbout() {
 
-        Scene dialogScene = new Scene(aboutPane, 290, 290);
-        about.setScene(dialogScene);
-        about.getIcons().add(stage.getIcons().get(0));
-        about.setResizable(false);
-        about.show();
+        try {
+            FXMLLoader root = new FXMLLoader(getClass().getResource("aboutFXML.fxml"));
+            Parent parent = (Parent) root.load();
+            Scene scene = new Scene(parent);
+            final Stage aboutStage = new Stage();
+            aboutStage.initModality(Modality.APPLICATION_MODAL);
+            aboutStage.initOwner(stage);
+            aboutStage.setScene(scene);
+            aboutStage.setResizable(false);
+            aboutStage.getIcons().add(stage.getIcons().get(0));
+            aboutStage.setTitle("About");
+            aboutStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
