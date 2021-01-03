@@ -5,7 +5,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class ImageProcessing {
@@ -15,12 +14,6 @@ public class ImageProcessing {
             System.err.println("Image not selected...");
             return null;
         }
-//        BufferedImage result = new BufferedImage(image.getWidth(), image.getHeight(),
-//                BufferedImage.TYPE_BYTE_GRAY);
-//        Graphics g = result.getGraphics();
-//        g.drawImage(image, 0, 0, null);
-//        g.dispose();
-//        return result;
         BufferedImage greyImage = new BufferedImage(image.getWidth(),
                 image.getHeight(), image.getType());
         for (int x = 0; x < image.getWidth(); x++) {

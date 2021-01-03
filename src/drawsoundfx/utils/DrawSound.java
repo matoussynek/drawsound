@@ -8,7 +8,6 @@ import rwmidi.RWMidi;
 
 import java.awt.image.BufferedImage;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class DrawSound {
 
@@ -46,6 +45,11 @@ public class DrawSound {
         ccMapping.put("edges", new Pair<>(85,1));
     }
 
+    /**
+     * Initializing the MIDI connection
+     * Creating the MIDI port called MIDI_PORT_NAME
+     * Selecting this port as the output of the application
+     */
     public void initialize() {
 
         midiPort = new TeVirtualMIDIPort(MIDI_PORT_NAME);
@@ -66,6 +70,11 @@ public class DrawSound {
         }
     }
 
+    /**
+     * Mapping a characteristic to a host device
+     * @param cstic Image characteristic
+     * @param button Button that triggered the action
+     */
     public void mapCC(String cstic, Button button) {
 
         if (cstic.equals(currentCistic) || currentCistic == null) {
@@ -87,12 +96,21 @@ public class DrawSound {
 
     }
 
+    /**
+     * Send a CC Message on the output of MIDI device
+     * @param CCNumber Controller number
+     * @param intValue Message value
+     */
     public void sendMessage(int CCNumber, int intValue) {
 
         device.sendController(1, CCNumber, intValue);
     }
 
-
+    /**
+     * Perform the edge detection
+     * @param displayedImage Input image
+     * @return Result of the edge detection
+     */
     public BufferedImage getEdgesImage(BufferedImage displayedImage) {
         detector.setSourceImage(displayedImage);
         detector.setDistance(edgeStrength);
@@ -104,6 +122,10 @@ public class DrawSound {
         createHistogram(image);
     }
 
+    /**
+     * Creates the color histogram and updates the values of Image characteristics
+     * @param image Input image
+     */
     private void createHistogram(BufferedImage image) {
         int brightnessSum = 0;
         colorHistogram = new int[4][4][4];
@@ -151,6 +173,10 @@ public class DrawSound {
         return outputDevices;
     }
 
+    /**
+     * Sets a new existing MIDI device
+     * @param outputName Device name
+     */
     public void setExternalMidiOutput(String outputName){
         for (int i = 0; i < devices.length; i++) {
             if (devices[i].getName().contains(outputName)) {
@@ -206,6 +232,21 @@ public class DrawSound {
         return device.getName();
     }
 
+    /**
+     * Sets Controller numbers and Channel numbers for Image characteristics
+     * @param rn
+     * @param rc
+     * @param gn
+     * @param gc
+     * @param bn
+     * @param bc
+     * @param brn
+     * @param brc
+     * @param dn
+     * @param dc
+     * @param en
+     * @param ec
+     */
     public void setCcMapping(int rn, int rc, int gn, int gc, int bn, int bc, int brn, int brc, int dn, int dc, int en, int ec) {
         ccMapping.replace("red", new Pair<>(rn,rc));
         ccMapping.replace("green", new Pair<>(gn,gc));

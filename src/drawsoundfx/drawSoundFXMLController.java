@@ -321,7 +321,10 @@ public class drawSoundFXMLController implements Initializable {
         displayImage(ImageProcessing.getGreyScaleImage(displayedImage, greyscaleFilter));
     }
 
-
+    /**
+     * Displays the image and updates the values of Image characteristics
+     * @param image
+     */
     private void displayImage(BufferedImage image) {
         if (image == null) {
             System.err.println("Image not selected...");
@@ -339,6 +342,9 @@ public class drawSoundFXMLController implements Initializable {
         CC85Change();
     }
 
+    /**
+     * Centers the image within the ImageView element in Image View Tab
+     */
     private void centerImage() {
         Image img = imgView.getImage();
         if (img != null) {
@@ -364,6 +370,9 @@ public class drawSoundFXMLController implements Initializable {
         }
     }
 
+    /**
+     * Loads a controller for the Settings window and displays the window
+     */
     @FXML
     public void setMidiOutput() {
 
@@ -390,7 +399,9 @@ public class drawSoundFXMLController implements Initializable {
 
 
     }
-
+    /**
+     * Loads a controller for the About window and displays the window
+     */
     @FXML
     public void showAbout() {
 
