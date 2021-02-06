@@ -51,4 +51,6 @@ The *"Process"* button applies the effects and recalculates the image characteri
 ![mapping tab](src/resources/effects.png)
 
 #### Setup
+For the correct setup of the application, the virtualMIDI SDK needs to be downloaded ([Download link](http://www.tobias-erichsen.de/software/virtualmidi/virtualmidi-sdk.html)). 
+Note that I do not own any rights to this software. 
 The user can either compile the code by themself or use the *.jar* file located in *out/artifacts/DrawSoundFX_jar*
